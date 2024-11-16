@@ -27,7 +27,7 @@
         <input type="text" th:field="*{username}" placeholder="Username*" id="username" name="username" required/>
         <input type="email" th:field="*{email}" placeholder="E-Mail*" id="email" name="email" required/>
           <input type="password" th:field="*{password}" placeholder="Password*" id="password" name="password" required/>
-            <input type="con-password" placeholder="Confirm Password*" required/>
+            <input type="password" placeholder="Confirm Password*" required/>
             <th:block th:if="${message}">
               <div class="description" th:text="${message}">Hello there, Register Form</div>
             </th:block>
