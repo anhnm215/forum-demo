@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        // exact tool name config in Manage Jenkins > Tools
-        maven "MAVEN3"
-        jdk "OracleJDK11"
-    }
-
     stages {
         stage('Fetch code') {
             steps {
