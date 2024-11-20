@@ -1,0 +1,22 @@
+all:
+  hosts:
+    jenkins:
+      ansible_host: 192.168.56.102
+      ansible_user: devops
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
+    nexus:
+      ansible_host: 192.168.56.105
+      ansible_user: devops
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
+    sonar:
+      ansible_host: 192.168.56.106
+      ansible_user: devops
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
+    tomcat:
+      ansible_host: 192.168.56.108
+      ansible_user: devops
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
+    mysql:
+      ansible_host: 192.168.56.109
+      ansible_user: devops
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa

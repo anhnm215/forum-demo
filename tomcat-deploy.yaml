@@ -1,0 +1,54 @@
+---
+- name: Deploy artifact to Tomcat
+  hosts: tomcat
+  become: yes
+  vars:
+    mvn_artifact_group_id: QA
+    mvn_artifact_artifact_id: forumapp
+    mvn_artifact_repository_url: http://192.168.56.105:8081/repository/forum-repo/
+    mvn_artifact_version: 16-24-11-325_07-12
+    mvn_artifact_username: admin
+    mvn_artifact_password: 123456a@
+    mvn_artifact_extension: war
+  tasks:
+    - name: Install pip
+      apt:
+        name: pip
+        state: present
+        update_cache: true
+
+    - name: Install lxml python package
+      ansible.builtin.pip:
+        name: lxml
+
+    - name: Download artifact from Nexus
+      community.general.maven_artifact:
+        group_id: "{{ mvn_artifact_group_id }}"
+        artifact_id: "{{ mvn_artifact_artifact_id }}"
+        repository_url: "{{ mvn_artifact_repository_url }}"
+        version: "{{ mvn_artifact_version }}"
+        username: "{{ mvn_artifact_username }}"
+        password: "{{ mvn_artifact_password }}"
+        extension: "{{ mvn_artifact_extension }}"
+        dest: /tmp/"{{ mvn_artifact_version }}"
+
+    - name: Remove default tomcat app
+      become: true
+      ansible.builtin.file:
+        path: /opt/tomcat/webapps/ROOT.war
+        state: absent
+
+    - name: Copy our artifact into /opt/tomcat
+      ansible.builtin.copy:
+        src: /tmp/"{{ mvn_artifact_version }}"
+        dest: /opt/tomcat/webapps/ROOT.war
+        owner: tomcat
+        group: tomcat
+        remote_src: true
+
+    - name: Issue daemon-reload to pick up config changes & Enable tomcat service
+      ansible.builtin.systemd_service:
+        enabled: true
+        daemon_reload: true
+        name: tomcat
+        state: started
