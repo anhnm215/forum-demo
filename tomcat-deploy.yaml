@@ -30,7 +30,7 @@
         username: "{{ mvn_artifact_username }}"
         password: "{{ mvn_artifact_password }}"
         extension: "{{ mvn_artifact_extension }}"
-        dest: /tmp/"{{ mvn_artifact_version }}".war
+        dest: "/tmp/{{ mvn_artifact_version }}.war"
 
     - name: Remove default tomcat app
       become: true
@@ -40,7 +40,7 @@
 
     - name: Copy our artifact into /opt/tomcat
       ansible.builtin.copy:
-        src: /tmp/"{{ mvn_artifact_version }}".war
+        src: "/tmp/{{ mvn_artifact_version }}.war"
         dest: /opt/tomcat/webapps/ROOT.war
         owner: tomcat
         group: tomcat
