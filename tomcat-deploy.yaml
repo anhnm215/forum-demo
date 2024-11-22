@@ -5,7 +5,7 @@
   vars:
     mvn_artifact_group_id: QA
     mvn_artifact_artifact_id: forumapp
-    mvn_artifact_repository_url: http://192.168.56.105:8081/repository/forum-repo/
+    mvn_artifact_repository_url: http://172.31.25.6:8081/repository/forum-repo/
     mvn_artifact_version: 16-24-11-325_07-12
     mvn_artifact_username: admin
     mvn_artifact_password: 123456a@

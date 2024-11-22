@@ -75,7 +75,7 @@ pipeline {
                     nexusArtifactUploader(
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    nexusUrl: '192.168.56.105:8081',
+                    nexusUrl: '172.31.25.6:8081',
                     groupId: 'QA',
                     version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
                     repository: 'forum-repo', // repo name on Nexus server
