@@ -14,13 +14,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                // run shell commands
-                sh 'mvn install -DskipTests'
-            }
-        }
-
         stage('Unit Tests') {
             steps {
                 sh 'mvn test'
@@ -66,6 +59,12 @@ pipeline {
                     // true = set pipeline to UNSTABLE, false = don't
                     waitForQualityGate abortPipeline: true
                 }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
             }
         }
 
